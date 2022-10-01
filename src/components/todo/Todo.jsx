@@ -39,13 +39,13 @@ const ToDoItem = styled.div`
 function ToDo({ title, text, id, isWorking, setTodo, todo }) {
   const onDelete = () => {
     setTodo((prev) => {
-      const targetIdx = prev.findIndex((item) => item.id == id);
+      const targetIdx = prev.findIndex((item) => item.id === id);
       return [...prev.slice(0, targetIdx), ...prev.slice(targetIdx + 1)];
     });
   };
   const onToggle = () => {
     setTodo((prev) => {
-      const targetIdx = prev.findIndex((item) => item.id == id);
+      const targetIdx = prev.findIndex((item) => item.id === id);
       return [
         ...prev.slice(0, targetIdx),
         { ...prev[targetIdx], ["isDone"]: !prev[targetIdx]["isDone"] },
