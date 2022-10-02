@@ -16,11 +16,6 @@ const FormBox = styled.div`
     margin-right: 10px;
     font-size: 500;
   }
-  input {
-    margin-right: 10px;
-    padding: 10px;
-    width: 300px;
-  }
 `;
 const FormBtn = styled.button`
   width: 120px;
@@ -31,11 +26,17 @@ const FormBtn = styled.button`
   cursor: pointer;
 `;
 
+const Input = styled.input`
+  margin-right: 10px;
+  padding: 10px;
+  width: 300px;
+`;
+
 function Form({ setTodo, index, setIndex }) {
   const [content, setContent] = useState({ title: "", text: "" });
+
   const onSubmit = (e) => {
     e.preventDefault();
-    // [{id: 0, title: "", body: "", isDone: false},{id: 1, title: "", body: "", isDone: false},{id:2 title: "", body: "", isDone: false},]
     setTodo((prev) => [...prev, { id: index, ...content, isDone: false }]);
     setIndex((prev) => prev + 1);
     setContent({ title: "", text: "" });
@@ -46,20 +47,19 @@ function Form({ setTodo, index, setIndex }) {
       ...content,
       [name]: value,
     });
-    console.log(content);
   };
   return (
     <Container onSubmit={onSubmit}>
       <FormBox>
         <span>제목</span>
-        <input
+        <Input
           type="text"
           name="title"
           value={content.title}
           onChange={onChange}
         />
         <span>내용</span>
-        <input
+        <Input
           type="text"
           name="text"
           value={content.text}

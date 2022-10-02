@@ -48,7 +48,7 @@ function ToDo({ title, text, id, isWorking, setTodo, todo }) {
       const targetIdx = prev.findIndex((item) => item.id === id);
       return [
         ...prev.slice(0, targetIdx),
-        { ...prev[targetIdx], ["isDone"]: !prev[targetIdx]["isDone"] },
+        { ...prev[targetIdx], isDone: !prev[targetIdx]["isDone"] },
         ...prev.slice(targetIdx + 1),
       ];
     });
@@ -70,3 +70,6 @@ function ToDo({ title, text, id, isWorking, setTodo, todo }) {
   );
 }
 export default ToDo;
+
+// var foo = {["a"]: "b"};
+// var foo = {"a": "b"};
