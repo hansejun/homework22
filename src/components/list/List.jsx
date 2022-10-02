@@ -14,7 +14,7 @@ const TodoList = styled.div`
   gap: 20px;
   margin-bottom: 30px;
 `;
-function List({ todo, setTodo }) {
+function List({ todo, onToggle, onDelete }) {
   return (
     <Container>
       <h1>Working</h1>
@@ -28,8 +28,8 @@ function List({ todo, setTodo }) {
               title={item.title}
               id={item.id}
               isWorking={true}
-              setTodo={setTodo}
-              todo={todo}
+              onToggle={onToggle}
+              onDelete={onDelete}
             />
           ))}
       </TodoList>
@@ -44,7 +44,8 @@ function List({ todo, setTodo }) {
               id={item.id}
               title={item.title}
               isWorking={false}
-              setTodo={setTodo}
+              onToggle={onToggle}
+              onDelete={onDelete}
             />
           ))}
       </TodoList>

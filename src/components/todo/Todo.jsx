@@ -36,34 +36,17 @@ const ToDoItem = styled.div`
   }
 `;
 
-function ToDo({ title, text, id, isWorking, setTodo, todo }) {
-  const onDelete = () => {
-    setTodo((prev) => {
-      const targetIdx = prev.findIndex((item) => item.id === id);
-      return [...prev.slice(0, targetIdx), ...prev.slice(targetIdx + 1)];
-    });
-  };
-  const onToggle = () => {
-    setTodo((prev) => {
-      const targetIdx = prev.findIndex((item) => item.id === id);
-      return [
-        ...prev.slice(0, targetIdx),
-        { ...prev[targetIdx], isDone: !prev[targetIdx]["isDone"] },
-        ...prev.slice(targetIdx + 1),
-      ];
-    });
-  };
-
+function ToDo({ title, text, id, isWorking, onDelete, onToggle }) {
   return (
     <ToDoItem>
       <h1>{title}</h1>
       <p>{text}</p>
       <div>
-        <button onClick={onDelete}>삭제</button>
+        <button onClick={() => onDelete(id)}>삭제</button>
         {isWorking ? (
-          <button onClick={onToggle}>완료</button>
+          <button onClick={() => onToggle(id)}>완료</button>
         ) : (
-          <button onClick={onToggle}>취소</button>
+          <button onClick={() => onToggle(id)}>취소</button>
         )}
       </div>
     </ToDoItem>
