@@ -16,12 +16,11 @@ function TodoList() {
   };
 
   const onToggle = (id) => {
-    const targetIdx = todo.findIndex((item) => item.id === id);
-    setTodo([
-      ...todo.slice(0, targetIdx),
-      { ...todo[targetIdx], isDone: !todo[targetIdx]["isDone"] },
-      ...todo.slice(targetIdx + 1),
-    ]);
+    setTodo(
+      todo.map((item) =>
+        item.id === id ? { ...item, isDone: !item.isDone } : item
+      )
+    );
   };
   return (
     <>
@@ -45,3 +44,10 @@ export default TodoList;
 //   const targetIdx = prev.findIndex((item) => item.id === id);
 //   return [...prev.slice(0, targetIdx), ...prev.slice(targetIdx + 1)];
 // });
+
+//const targetIdx = todo.findIndex((item) => item.id === id);
+// setTodo([
+//   ...todo.slice(0, targetIdx),
+//   { ...todo[targetIdx], isDone: !todo[targetIdx]["isDone"] },
+//   ...todo.slice(targetIdx + 1),
+// ]);
