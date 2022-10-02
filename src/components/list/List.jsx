@@ -8,7 +8,7 @@ const Container = styled.div`
     margin-bottom: 20px;
   }
 `;
-const TodoList = styled.div`
+const Todos = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 300px));
   gap: 20px;
@@ -18,7 +18,7 @@ function List({ todo, onToggle, onDelete }) {
   return (
     <Container>
       <h1>Working</h1>
-      <TodoList>
+      <Todos>
         {todo
           .filter((item) => !item.isDone)
           .map((item, i) => (
@@ -32,9 +32,9 @@ function List({ todo, onToggle, onDelete }) {
               onDelete={onDelete}
             />
           ))}
-      </TodoList>
+      </Todos>
       <h1>Done</h1>
-      <TodoList>
+      <Todos>
         {todo
           .filter((item) => item.isDone)
           .map((item, i) => (
@@ -48,7 +48,7 @@ function List({ todo, onToggle, onDelete }) {
               onDelete={onDelete}
             />
           ))}
-      </TodoList>
+      </Todos>
     </Container>
   );
 }
