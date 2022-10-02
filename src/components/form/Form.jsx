@@ -32,15 +32,18 @@ const Input = styled.input`
   width: 300px;
 `;
 
-function Form({ setTodo, index, setIndex }) {
+function Form({ setTodo, index }) {
   const [content, setContent] = useState({ title: "", text: "" });
 
   const onSubmit = (e) => {
     e.preventDefault();
-    setTodo((prev) => [...prev, { id: index, ...content, isDone: false }]);
-    setIndex((prev) => prev + 1);
+    setTodo((prev) => [
+      ...prev,
+      { id: index.current++, ...content, isDone: false },
+    ]);
     setContent({ title: "", text: "" });
   };
+
   const onChange = (e) => {
     const { name, value } = e.target;
     setContent({
@@ -48,6 +51,7 @@ function Form({ setTodo, index, setIndex }) {
       [name]: value,
     });
   };
+
   return (
     <Container onSubmit={onSubmit}>
       <FormBox>
