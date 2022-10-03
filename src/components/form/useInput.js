@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 
 function useInput(initial) {
   const [datas, setDatas] = useState(initial);
@@ -8,7 +8,7 @@ function useInput(initial) {
     setDatas((prev) => ({ ...prev, [name]: value }));
   };
 
-  const reset = () => setDatas(initial);
+  const reset = useCallback(() => setDatas(initial), [initial]);
 
   return [datas, onChange, reset];
 }
