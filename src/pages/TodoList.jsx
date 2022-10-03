@@ -1,4 +1,4 @@
-import React, { useReducer, useState } from "react";
+import React, { useReducer } from "react";
 import Layout from "../components/layout/Layout";
 import Form from "../components/form/Form";
 import List from "../components/list/List";
@@ -29,13 +29,11 @@ export const TodosDispatch = React.createContext(null);
 function TodoList() {
   const [todos, todosDispatch] = useReducer(todosReducer, initialState);
 
-  const [content, setContent] = useState({ title: "", text: "" });
-
   return (
     <>
       <TodosDispatch.Provider value={todosDispatch}>
         <Layout>
-          <Form data={content} setContent={setContent} />
+          <Form />
           <List
             todos={todos.filter((item) => !item.isDone)}
             title={"Working"}

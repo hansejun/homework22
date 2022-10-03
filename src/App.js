@@ -1,5 +1,17 @@
 import { createGlobalStyle } from "styled-components";
 import TodoList from "./pages/TodoList";
+
+function App() {
+  return (
+    <>
+      <TodoList />
+      <GlobalStyle />
+    </>
+  );
+}
+
+export default App;
+
 const GlobalStyle = createGlobalStyle`
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
@@ -55,14 +67,3 @@ body{
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 `;
-
-function App() {
-  return (
-    <>
-      <TodoList />
-      <GlobalStyle />
-    </>
-  );
-}
-
-export default App;

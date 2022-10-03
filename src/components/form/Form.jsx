@@ -1,4 +1,4 @@
-import { useContext, useRef } from "react";
+import { useCallback, useContext, useRef } from "react";
 import styled from "styled-components";
 import { TodosDispatch } from "../../pages/TodoList";
 import FormBtn from "./FormBtn";
@@ -10,15 +10,18 @@ function Form() {
   const todosDispatch = useContext(TodosDispatch);
   const [data, onChange, reset] = useInput({ titie: "", text: "" });
 
-  const onSubmit = (e) => {
-    e.preventDefault();
-    todosDispatch({
-      type: "CREATE",
-      body: { id: indexRef.current, isDone: false, ...data },
-    });
-    indexRef.current += 1;
-    reset();
-  };
+  const onSubmit = useCallback(
+    (e) => {
+      e.preventDefault();
+      todosDispatch({
+        type: "CREATE",
+        body: { id: indexRef.current, isDone: false, ...data },
+      });
+      indexRef.current += 1;
+      reset();
+    },
+    [data, reset, todosDispatch]
+  );
 
   return (
     <Container onSubmit={onSubmit}>
