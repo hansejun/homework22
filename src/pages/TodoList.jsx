@@ -56,27 +56,21 @@ function TodoList() {
           onChange={onChange}
         />
         <List
-          todo={todo}
+          todo={todo.filter((item) => !item.isDone)}
           setTodo={setTodo}
           onDelete={onDelete}
           onToggle={onToggle}
-        ></List>
+          title={"Working"}
+        />
+        <List
+          todo={todo.filter((item) => item.isDone)}
+          setTodo={setTodo}
+          onDelete={onDelete}
+          onToggle={onToggle}
+          title={"Done"}
+        />
       </Layout>
     </>
   );
 }
 export default TodoList;
-// <Form setTodo={setTodo} index={index} setIndex={setIndex}></Form>
-//const [index, setIndex] = useState(2); // Date.now()도 중복없는 인덱싱 가능
-
-// setTodo((prev) => {
-//   const targetIdx = prev.findIndex((item) => item.id === id);
-//   return [...prev.slice(0, targetIdx), ...prev.slice(targetIdx + 1)];
-// });
-
-//const targetIdx = todo.findIndex((item) => item.id === id);
-// setTodo([
-//   ...todo.slice(0, targetIdx),
-//   { ...todo[targetIdx], isDone: !todo[targetIdx]["isDone"] },
-//   ...todo.slice(targetIdx + 1),
-// ]);
