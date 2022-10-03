@@ -11,25 +11,20 @@ function TodoList() {
     { id: 1, title: "잠자기", text: "잠!", isDone: true },
   ]);
   const [content, setContent] = useState({ title: "", text: "" });
+
   const indexRef = useRef(2);
 
-  const onDelete = useCallback(
-    (id) => {
-      setTodo(todo.filter((item) => item.id !== id) || []);
-    },
-    [todo]
-  );
+  const onDelete = useCallback((id) => {
+    setTodo((prev) => prev.filter((item) => item.id !== id) || []);
+  }, []);
 
-  const onToggle = useCallback(
-    (id) => {
-      setTodo(
-        todo.map((item) =>
-          item.id === id ? { ...item, isDone: !item.isDone } : item
-        )
-      );
-    },
-    [todo]
-  );
+  const onToggle = useCallback((id) => {
+    setTodo((prev) =>
+      prev.map((item) =>
+        item.id === id ? { ...item, isDone: !item.isDone } : item
+      )
+    );
+  }, []);
 
   const onSubmit = (e) => {
     e.preventDefault();
