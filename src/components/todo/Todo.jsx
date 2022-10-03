@@ -1,4 +1,41 @@
+import { useCallback, useContext } from "react";
 import styled from "styled-components";
+import { TodosDispatch } from "../../pages/TodoList";
+
+function ToDo({ todo }) {
+  const todosDispatch = useContext(TodosDispatch);
+  const { title, text, id, isDone } = todo;
+
+  const onDelete = useCallback(
+    (id) => {
+      todosDispatch({ type: "DELETE", body: { id } });
+    },
+    [todosDispatch]
+  );
+
+  const onToggle = useCallback(
+    (id) => {
+      todosDispatch({ type: "TOGGLE", body: { id } });
+    },
+    [todosDispatch]
+  );
+
+  return (
+    <ToDoItem>
+      <h1>{title}</h1>
+      <p>{text}</p>
+      <div>
+        <button onClick={() => onDelete(id)}>삭제</button>
+        {!isDone ? (
+          <button onClick={() => onToggle(id)}>완료</button>
+        ) : (
+          <button onClick={() => onToggle(id)}>취소</button>
+        )}
+      </div>
+    </ToDoItem>
+  );
+}
+export default ToDo;
 
 const ToDoItem = styled.div`
   width: 100%;
@@ -35,24 +72,5 @@ const ToDoItem = styled.div`
     }
   }
 `;
-
-function ToDo({ title, text, id, isWorking, onDelete, onToggle }) {
-  return (
-    <ToDoItem>
-      <h1>{title}</h1>
-      <p>{text}</p>
-      <div>
-        <button onClick={() => onDelete(id)}>삭제</button>
-        {isWorking ? (
-          <button onClick={() => onToggle(id)}>완료</button>
-        ) : (
-          <button onClick={() => onToggle(id)}>취소</button>
-        )}
-      </div>
-    </ToDoItem>
-  );
-}
-export default ToDo;
-
 // var foo = {["a"]: "b"};
 // var foo = {"a": "b"};

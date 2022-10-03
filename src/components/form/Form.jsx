@@ -1,25 +1,25 @@
+import { useContext, useRef } from "react";
 import styled from "styled-components";
+import { TodosDispatch } from "../../pages/TodoList";
 import FormBtn from "./FormBtn";
 import Input from "./Input";
+import useInput from "./useInput";
 
-const Container = styled.form`
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 30px;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.3);
-`;
-const FormBox = styled.div`
-  display: flex;
-  align-items: center;
-  span {
-    margin-right: 10px;
-    font-size: 500;
-  }
-`;
+function Form() {
+  const indexRef = useRef(2);
+  const todosDispatch = useContext(TodosDispatch);
+  const [data, onChange, reset] = useInput({ titie: "", text: "" });
 
-function Form({ data, onSubmit, onChange }) {
+  const onSubmit = (e) => {
+    e.preventDefault();
+    todosDispatch({
+      type: "CREATE",
+      body: { id: indexRef.current, isDone: false, ...data },
+    });
+    indexRef.current += 1;
+    reset();
+  };
+
   return (
     <Container onSubmit={onSubmit}>
       <FormBox>
@@ -44,3 +44,20 @@ function Form({ data, onSubmit, onChange }) {
 }
 
 export default Form;
+
+const Container = styled.form`
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 30px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+`;
+const FormBox = styled.div`
+  display: flex;
+  align-items: center;
+  span {
+    margin-right: 10px;
+    font-size: 500;
+  }
+`;
